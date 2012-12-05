@@ -235,7 +235,13 @@ mcd_kludge_transport_account_connection_cb (
   McdKludgeTransport *self = MCD_KLUDGE_TRANSPORT (user_data);
   McdKludgeTransportPrivate *priv = self->priv;
 
-  if (mcd_connectivity_monitor_is_online (priv->minotaur))
+  if (_mcd_account_needs_dispatch (account))
+    {
+      DEBUG ("Always-dispatchable account %s needs no transport, proceeding",
+          mcd_account_get_unique_name (account));
+      mcd_account_connection_proceed (account, TRUE);
+    }
+  else if (mcd_connectivity_monitor_is_online (priv->minotaur))
     {
       mcd_account_connection_bind_transport (account, (McdTransport *) self);
       mcd_account_connection_proceed (account, TRUE);
