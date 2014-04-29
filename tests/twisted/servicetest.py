@@ -20,9 +20,9 @@
 Infrastructure code for testing Mission Control
 """
 
-from twisted.internet import glib2reactor
+from twisted.internet import gireactor
 from twisted.internet.protocol import Protocol, Factory, ClientFactory
-glib2reactor.install()
+gireactor.install()
 import sys
 
 import pprint
