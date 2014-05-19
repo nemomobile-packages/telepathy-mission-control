@@ -128,7 +128,7 @@ if test x$installed_tests = xyes; then
 fi
 AM_CONDITIONAL([ENABLE_INSTALLED_TESTS], [test "x$installed_tests" = xyes])
 
-mctestsdir=${libdir}/telepathy-mission-control-tests
+mctestsdir=/opt/tests/telepathy-mission-control
 AC_SUBST(mctestsdir)
 
 AC_ARG_WITH([accounts_dir], [AS_HELP_STRING([--with-accounts-dir=<path>],[Directory in which accounts were previously stored])])
