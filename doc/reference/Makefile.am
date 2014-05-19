@@ -1,0 +1,1 @@
+SUBDIRS = mission-control-plugins
