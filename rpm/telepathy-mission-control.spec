@@ -8,13 +8,6 @@ License:    LGPLv2
 URL:        http://mission-control.sourceforge.net/
 Source0:    http://telepathy.freedesktop.org/releases/telepathy-mission-control/%{name}-%{version}.tar.gz
 Source1:    mktests.sh
-Patch0:     0001-Always-allow-accounts-with-always_dispatch-to-connec.patch
-Patch1:     nemo-tests-dir-fix.patch
-Patch2:     nemo-fix-system-dbus-for-tests.patch
-Patch3:     disable-gtk-doc.patch
-Patch4:     0001-McdSlacker-Revert-use-of-org.gnome.SessionManager-in.patch
-Patch5:     0001-Prevent-assert-for-offline-accounts-with-power-savin.patch
-Patch6:     0001-tests-use-new-twisted-gireactor-to-work-with-gi-base.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(dbus-1) >= 0.95
@@ -65,25 +58,6 @@ files for developing applications that use %{name}.
 %prep
 %setup -q -n %{name}-%{version}/telepathy-mission-control
 
-# 0001-Always-allow-accounts-with-always_dispatch-to-connec.patch
-%patch0 -p1
-# nemo-tests-dir-fix.patch
-%patch1 -p1
-# nemo-fix-system-dbus-for-tests.patch
-%patch2 -p1
-# disable-gtk-doc.patch
-%patch3 -p1
-# 0001-McdSlacker-Revert-use-of-org.gnome.SessionManager-in.patch
-%patch4 -p1
-# 0001-Prevent-assert-for-offline-accounts-with-power-savin.patch
-%patch5 -p1
-# 0001-tests-use-new-twisted-gireactor-to-work-with-gi-base.patch
-%patch6 -p1
-# >> setup
-%__cp $RPM_SOURCE_DIR/mktests.sh tests/twisted/
-%__chmod 0755 tests/twisted/mktests.sh
-# << setup
-
 %build
 # >> build pre
 #autoreconf -vfi
@@ -111,7 +85,7 @@ rm -rf %{buildroot}
 %make_install
 
 # >> install post
-gzip ChangeLog
+gzip -k ChangeLog
 %fdupes %{buildroot}/%{_datadir}/gtk-doc/
 %fdupes %{buildroot}/%{_includedir}
 install -m 0644 tests/tests.xml $RPM_BUILD_ROOT/opt/tests/telepathy-mission-control/tests.xml
