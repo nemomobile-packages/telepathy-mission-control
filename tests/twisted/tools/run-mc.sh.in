@@ -2,4 +2,6 @@
 
 ulimit -c unlimited
 
+export DBUS_SYSTEM_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS
+
 @libexecdir@/mission-control-5
